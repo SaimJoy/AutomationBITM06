@@ -1,4 +1,3 @@
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
@@ -7,7 +6,7 @@ import time
 class OrangeHRM():
 
     def website(self):
-        driver=webdriver.Chrome(executable_path="/Drivers/Drivers/chromedriver_102.0.exe")
+        driver=webdriver.Chrome(executable_path="E:\AutomationBITM06\Drivers\Drivers\chromedriver_102.0.exe")
         driver.maximize_window()
         driver.get("https://opensource-demo.orangehrmlive.com/index.php/auth/validateCredentials")
 
@@ -152,51 +151,102 @@ class OrangeHRM():
         else:
             print("Date picker element not found")
 
-
         license_expdate.clear()
-        time.sleep(5)
+        time.sleep(3)
         license_expdate.send_keys("2022-06-08")
 
 #SSN Number
-        ssn_number=driver.find_element(By.XPATH,'//*[@id="personal_txtNICNo"]')
-        ssn_number.clear()
-        ssn_number.send_keys("607-66-XXXX")
-        if ssn_number is not None:
-            print("SSN Element found")
-        else:
-            print("SSN not found")
+
+     #   ssn_number=driver.find_element(By.XPATH,'//*[@id="personal_txtNICNo"]')
+     #   ssn_number.clear()
+     #   ssn_number.send_keys("607-66-XXXX")
+    #    if ssn_number is not None:
+            #print("SSN Element found")
+    #    else:
+         #   print("SSN not found")
 
 #SIN Number
-        sin_num=driver.find_element(By.XPATH,'//*[@id="personal_txtSINNo"]')
-        sin_num.clear()
-        sin_num.send_keys("665-56-yXXX")
-        if sin_num is not None:
-            print("Sin_num element found")
-        else:
-            print("Sin_num element Not found")
+     #   sin_num=driver.find_element(By.XPATH,'//*[@id="personal_txtSINNo"]')
+       # sin_num.clear()
+     #   sin_num.send_keys("665-56-yXXX")
+     #   if sin_num is not None:
+     #       print("Sin_num element found")
+     #   else:
+    #        print("Sin_num element Not found")
 
 #gender Element
-        male=driver.find_element(By.XPATH,'//*[@id="frmEmpPersonalDetails"]/fieldset/ol[3]/li[1]/ul/li[1]/label')
-        male.click()
+        #male=driver.find_element(By.XPATH,'//*[@id="frmEmpPersonalDetails"]/fieldset/ol[3]/li[1]/ul/li[1]/label')
+        #male.click()
         #male_btn_status = male.is_selected()   #for checiking the button status it is selected or not
-        time.sleep(10)
+       # time.sleep(5)
 
-        female=driver.find_element('//*[@id="frmEmpPersonalDetails"]/fieldset/ol[3]/li[1]/ul/li[2]/label')
+        female=driver.find_element(By.XPATH,'//*[@id="frmEmpPersonalDetails"]/fieldset/ol[3]/li[1]/ul/li[2]/label')
         female.click()
-        time.sleep(5)
-       # male.click()
+        time.sleep(3)
 
 #Dropdown
-        maritial_status=driver.find_element(By.XPATH,'//*[@id="personal_cmbMarital"]')
+        maritial_status= driver.find_element(By.XPATH,'//*[@id="personal_cmbMarital"]')
         m_dropdown= Select(maritial_status)
         m_dropdown.select_by_value('Single')
-        time.sleep(5)
+        time.sleep(3)
 
-       
+#Nationality
+        n_status= driver.find_element(By.XPATH,'//*[@id="personal_cmbNation"]')
+        n_dropdwon=Select(n_status)
+        n_dropdwon.select_by_value('15')
+        time.sleep(3)
 
+#dob
+        d_birth=driver.find_element(By.XPATH,'//*[@id="personal_DOB"]')
+        d_birth.clear()
+        d_birth.send_keys('1997-04-05')
+        time.sleep(2)
+#nickname
+      #  nick_name = driver.find_element(By.XPATH,'//*[@id="personal_txtEmpNickName"]')
+      #  nick_name.clear()
+     #   nick_name.send_keys("saim")
+      #  time.sleep(2)
+#somker status
+      #  smoker_flag = driver.find_element(By.XPATH,'//*[@id="personal_chkSmokeFlag"]')
+      #  if smoker_flag is not None:
+     #       print("Smoker flag element found")
+      #  else:
+       #     print("Smoker Element Not found")
 
-        time.sleep(50)  #freez window
+#save btn
+        save_btn=driver.find_element(By.XPATH,'//*[@id="btnSave"]')
+        save_btn.click()
+        time.sleep(2)  #freez window
 
+#Custom field
+
+        edit_btn=driver.find_element(By.XPATH, '//*[@id="btnEditCustom"]')
+        edit_btn.click()
+
+        blood_type=driver.find_element(By.XPATH,'//*[@id="frmEmpCustomFields"]/ol/li[1]/select')
+        blood_type_dropdown=Select(blood_type)
+        blood_type_dropdown.select_by_value("O+")
+        time.sleep(2)
+
+      # extra_field=driver.find_element(By.XPATH,'//*[@id="custom2"]')
+      #  extra_field.clear()
+       # extra_field.send_keys("Uni-Donar")
+
+        save_btn2=driver.find_element(By.XPATH,'//*[@id="btnEditCustom"]')
+        save_btn2.click()
+        time.sleep(2)
+#Attachment  filed
+        add_btn= driver.find_element(By.XPATH, '//*[@id="btnAddAttachment"]')
+        add_btn.click()
+
+        choose_btn= driver.find_element(By.XPATH,'//*[@id="ufile"]')
+        choose_btn.click()
+        choose_btn.send_keys('//*[@id="ufile"]')
+        comment_box=driver.find_element(By.XPATH,'//*[@id="txtAttDesc"]')
+        comment_box.send_keys("asdfds")
+        upload_button=driver.find_element(By.XPATH,'//*[@id="btnSaveAttachment"]')
+        upload_button.click()
+        time.sleep(3)
 
 test_obj = OrangeHRM()
 test_obj.website()
